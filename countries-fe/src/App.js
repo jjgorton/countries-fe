@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import { useEffect } from 'react';
+
+import Map from './components/map/Map';
+
+import { getAll } from './api/actions';
+
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    // useEffect(() => {
+    //     getAll()
+    //         .then((data) => console.log(data))
+    //         .catch((err) => console.err(err));
+    // }, []);
+
+    return (
+        <div className='App'>
+            <h1>Countries</h1>
+            <Map />
+        </div>
+    );
 }
 
 export default App;
