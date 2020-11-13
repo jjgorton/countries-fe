@@ -5,11 +5,11 @@ import Plot from 'react-plotly.js';
 
 const Map = () => {
     const [viewport, setViewport] = useState({
-        width: 400,
-        height: 400,
+        width: '85vw',
+        height: '80vh',
         latitude: 37.7577,
         longitude: -122.4376,
-        zoom: 8,
+        zoom: 1.5,
     });
 
     return (
@@ -23,8 +23,9 @@ const Map = () => {
             <ReactMapGL
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-                onViewportChange={(viewport) => {
-                    setViewport({ viewport });
+                onViewportChange={(viewChange) => {
+                    console.log({ port: viewport }, { change: viewChange });
+                    setViewport(viewChange);
                 }}>
                 <div></div>
             </ReactMapGL>
