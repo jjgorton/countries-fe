@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ReactMapGL from 'react-map-gl';
 import Plot from 'react-plotly.js';
 
-const Map = () => {
+const Map = ({ closestCountry }) => {
     const [viewport, setViewport] = useState({
         width: '85vw',
         height: '80vh',
@@ -23,10 +23,9 @@ const Map = () => {
             <ReactMapGL
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-                onViewportChange={(viewChange) => {
-                    console.log({ port: viewport }, { change: viewChange });
-                    setViewport(viewChange);
-                }}>
+                mapStyle='mapbox://styles/jjgorton/ckhgy8lt90trq19q7hnrgps0e'
+                onClick={(e) => closestCountry(e.lngLat[1], e.lngLat[0])}
+                onViewportChange={(viewChange) => setViewport(viewChange)}>
                 <div></div>
             </ReactMapGL>
         </div>
