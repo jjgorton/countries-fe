@@ -5,8 +5,8 @@ import Plot from 'react-plotly.js';
 
 const Map = ({ closestCountry }) => {
     const [viewport, setViewport] = useState({
-        width: '85vw',
-        height: '80vh',
+        width: '100vw',
+        height: '90vh',
         latitude: 37.7577,
         longitude: -122.4376,
         zoom: 1.5,
@@ -14,12 +14,7 @@ const Map = ({ closestCountry }) => {
 
     return (
         <div>
-            <h2
-                onClick={(e) => {
-                    console.log('clicked');
-                }}>
-                Maps
-            </h2>
+            <h2>Maps</h2>
             <ReactMapGL
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}

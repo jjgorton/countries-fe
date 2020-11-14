@@ -6,6 +6,7 @@ import { getAll } from './api/actions';
 import { distance } from './utils/distance.ts';
 
 import './App.css';
+import Details from './components/details/Details';
 
 function App() {
     const [allCountries, setAllCountries] = useState({});
@@ -38,6 +39,7 @@ function App() {
         <div className='App'>
             <h1>Countries</h1>
             <p>{selected.name}</p>
+            <Details selected={selected} />
             <Map closestCountry={closestCountry} />
         </div>
     );
