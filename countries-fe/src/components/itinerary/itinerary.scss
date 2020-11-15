@@ -1,0 +1,8 @@
+@import '../../global_styles/';
+
+.itinerary {
+    z-index: 3;
+    min-height: fit-content;
+    overflow-y: scroll;
+    margin-top: 25vh;
+}

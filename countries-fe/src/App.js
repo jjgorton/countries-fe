@@ -5,13 +5,17 @@ import { distance } from './utils/distance.ts';
 
 import Map from './components/map/Map';
 import Details from './components/details/Details';
+import SearchBar from './components/search/SearchBar';
+import History from './components/history/History';
+import Itinerary from './components/itinerary/Itinerary';
 
 import './app.scss';
-import SearchBar from './components/search/SearchBar';
 
 function App() {
     const [allCountries, setAllCountries] = useState({});
     const [selected, setSelected] = useState({});
+    const [history, setHistory] = useState([]);
+    const [itinerary, setItinerary] = useState([]);
 
     useEffect(() => {
         getAll()
@@ -33,13 +37,15 @@ function App() {
             if (currDistance < closest.dist)
                 closest = { country: country, dist: currDistance };
         });
-        setSelected(closest.country);
+        setHistory([...history, closest.country]);
+        setItinerary([...itinerary, closest.country]);
     };
 
     return (
         <div className='App'>
-            <Details selected={selected} />
+            <History history={history} />
             <SearchBar />
+            <Itinerary itinerary={itinerary} />
             <Map closestCountry={closestCountry} />
         </div>
     );

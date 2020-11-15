@@ -3,6 +3,18 @@
 .search-bar {
     z-index: 1;
 
+    //-->center with position absolute
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    //--------------
+
+    height: 1px;
+    min-height: fit-content;
+    width: 1px;
+    min-width: fit-content;
+
     input {
         width: 50vw;
         height: 5rem;

@@ -1,0 +1,10 @@
+@import '../../global_styles/';
+
+.history {
+    // position: absolute;
+    z-index: 3;
+    // height: 1px;
+    min-height: fit-content;
+    overflow-y: scroll;
+    margin-top: 25vh;
+}
