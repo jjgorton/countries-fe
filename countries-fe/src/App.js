@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import Map from './components/map/Map';
-
 import { getAll } from './api/actions';
 import { distance } from './utils/distance.ts';
 
-import './App.css';
+import Map from './components/map/Map';
 import Details from './components/details/Details';
+
+import './app.scss';
 
 function App() {
     const [allCountries, setAllCountries] = useState({});
@@ -37,8 +37,6 @@ function App() {
 
     return (
         <div className='App'>
-            <h1>Countries</h1>
-            <p>{selected.name}</p>
             <Details selected={selected} />
             <Map closestCountry={closestCountry} />
         </div>
