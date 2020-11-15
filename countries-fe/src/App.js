@@ -7,6 +7,7 @@ import Map from './components/map/Map';
 import Details from './components/details/Details';
 
 import './app.scss';
+import SearchBar from './components/search/SearchBar';
 
 function App() {
     const [allCountries, setAllCountries] = useState({});
@@ -38,6 +39,7 @@ function App() {
     return (
         <div className='App'>
             <Details selected={selected} />
+            <SearchBar />
             <Map closestCountry={closestCountry} />
         </div>
     );

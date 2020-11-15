@@ -1,0 +1,30 @@
+@import '../../global_styles/';
+
+.search-bar {
+    z-index: 1;
+
+    input {
+        width: 50vw;
+        height: 5rem;
+        font-size: 2rem;
+        padding: 1rem 2rem;
+        margin: 3rem 1rem;
+        color: navy;
+        background: rgb(245, 245, 244);
+        border: 2px solid rgb(63, 52, 26);
+        border-radius: 25px;
+        box-shadow: 0 0 15px whitesmoke;
+    }
+
+    button {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        border: 3px inset goldenrod;
+        background-image: $bronze;
+        font-size: 1.5rem;
+        color: goldenrod;
+        text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.349),
+            1px 1px 1px rgba(0, 0, 0, 0.274);
+    }
+}
