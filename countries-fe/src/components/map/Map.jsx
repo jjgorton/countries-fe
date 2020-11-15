@@ -8,7 +8,7 @@ import './map.scss';
 const Map = ({ closestCountry }) => {
     const [viewport, setViewport] = useState({
         width: '100vw',
-        height: '90vh',
+        height: '100vh',
         latitude: 37.7577,
         longitude: -122.4376,
         zoom: 1.5,
