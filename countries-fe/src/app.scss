@@ -1,0 +1,9 @@
+@import './global_styles/';
+
+.App {
+    display: flex;
+    justify-content: space-between;
+    background-image: $bronze;
+    width: 100%;
+    height: 100vh;
+}

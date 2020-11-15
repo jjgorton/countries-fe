@@ -1,0 +1,26 @@
+@import '../../global_styles/';
+
+.details {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    height: 20rem;
+    z-index: 1;
+    background-image: $bronze;
+    border: 2.5rem inset goldenrod;
+    margin: 1rem;
+    h1 {
+        font-size: 4rem;
+        font-weight: 900;
+        text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.349),
+            1px 1px 1px rgba(0, 0, 0, 0.274);
+        color: goldenrod;
+        padding: 2rem;
+    }
+
+    p {
+        font-size: 1.3rem;
+        color: navy;
+        padding: 1rem;
+    }
+}

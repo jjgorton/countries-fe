@@ -3,23 +3,19 @@ import React, { useState } from 'react';
 import ReactMapGL from 'react-map-gl';
 import Plot from 'react-plotly.js';
 
+import './map.scss';
+
 const Map = ({ closestCountry }) => {
     const [viewport, setViewport] = useState({
-        width: '85vw',
-        height: '80vh',
+        width: '100vw',
+        height: '90vh',
         latitude: 37.7577,
         longitude: -122.4376,
         zoom: 1.5,
     });
 
     return (
-        <div>
-            <h2
-                onClick={(e) => {
-                    console.log('clicked');
-                }}>
-                Maps
-            </h2>
+        <div className='map'>
             <ReactMapGL
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
