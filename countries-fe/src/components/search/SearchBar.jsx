@@ -14,6 +14,16 @@ const SearchBar = ({ data }) => {
         setSuggestion(autoComplete(e.target.value, data));
     };
 
+    const handleKeys = (e) => {
+        console.log(e);
+        if (e.key === 'Tab' || e.key === 'ArrowRight') {
+            setQuery(suggestion);
+        }
+        if (e.key === 'Escape') {
+            setSuggestion(query);
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuggestion(query);
@@ -21,7 +31,12 @@ const SearchBar = ({ data }) => {
 
     return (
         <form className='search-bar' onSubmit={handleSubmit}>
-            <input type='text' onChange={handleChanges} value={query} />
+            <input
+                type='text'
+                onChange={handleChanges}
+                value={query}
+                onKeyDown={handleKeys}
+            />
             <div className='auto-complete'>{suggestion}</div>
             <button>Search</button>
         </form>
