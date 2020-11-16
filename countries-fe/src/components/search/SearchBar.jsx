@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { autoComplete } from '../../utils/autoComplete';
+import { autoComplete, swapKeyVal } from '../../utils';
 
 import './searchBar.scss';
 
-const SearchBar = ({ data }) => {
+const SearchBar = ({
+    allCountries,
+    selected,
+    setSelected,
+    history,
+    setHistory,
+}) => {
     const [query, setQuery] = useState('');
     const [suggestion, setSuggestion] = useState('');
+    const [keyWords, setKeyWords] = useState([]);
+
+    useEffect(() => {
+        //prevent running on rerenders
+        //if perfomance still suffers, consider useCallback
+        setKeyWords(Object.keys(swapKeyVal(allCountries)));
+    }, []);
 
     const handleChanges = (e) => {
         setQuery(e.target.value);
-
-        setSuggestion(autoComplete(e.target.value, data));
+        setSuggestion(autoComplete(e.target.value, keyWords));
     };
 
     const handleKeys = (e) => {
-        console.log(e);
         if (e.key === 'Tab' || e.key === 'ArrowRight') {
             setQuery(suggestion);
         }
@@ -27,6 +38,27 @@ const SearchBar = ({ data }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuggestion(query);
+        setSuggestion('');
+        setQuery('');
+
+        const countryIndexSet = swapKeyVal(allCountries)[query];
+
+        if (!countryIndexSet) {
+            alert(
+                `hmm... we can't seem to find anything that matches "${query}"`
+            );
+
+            return;
+        }
+
+        const list = [];
+        countryIndexSet.forEach((i) => {
+            console.log(allCountries[i]);
+            list.push(allCountries[i]);
+        });
+
+        setSelected([...list]);
+        setHistory([...history, ...list]);
     };
 
     return (

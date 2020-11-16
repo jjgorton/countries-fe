@@ -7,8 +7,8 @@ import './history.scss';
 const History = ({ history }) => {
     return (
         <div className='history'>
-            {history.map((country) => (
-                <Details country={country} />
+            {history.map((country, index) => (
+                <Details key={index} country={country} />
             ))}
         </div>
     );
