@@ -8,6 +8,8 @@ import SearchBar from './components/search/SearchBar';
 import History from './components/history/History';
 import Itinerary from './components/itinerary/Itinerary';
 
+import { DragDropContext } from 'react-beautiful-dnd';
+
 import './app.scss';
 
 function App() {
@@ -37,22 +39,24 @@ function App() {
                 closest = { country: country, dist: currDistance };
         });
         setHistory([...history, closest.country]);
-        setItinerary([...itinerary, closest.country]);
+        // setItinerary([...itinerary, closest.country]);
     };
 
     return (
-        <div className='App'>
-            <History history={history} />
-            <SearchBar
-                allCountries={allCountries}
-                selected={selected}
-                setSelected={setSelected}
-                history={history}
-                setHistory={setHistory}
-            />
-            <Itinerary itinerary={itinerary} />
-            <Map closestCountry={closestCountry} />
-        </div>
+        <DragDropContext>
+            <div className='App'>
+                <History history={history} />
+                <SearchBar
+                    allCountries={allCountries}
+                    selected={selected}
+                    setSelected={setSelected}
+                    history={history}
+                    setHistory={setHistory}
+                />
+                <Itinerary itinerary={itinerary} />
+                <Map closestCountry={closestCountry} />
+            </div>
+        </DragDropContext>
     );
 }
 
