@@ -10,6 +10,7 @@ const SearchBar = ({
     setSelected,
     history,
     setHistory,
+    addHistory,
 }) => {
     const [query, setQuery] = useState('');
     const [suggestion, setSuggestion] = useState('');
@@ -19,7 +20,7 @@ const SearchBar = ({
         //prevent running on rerenders
         //if perfomance still suffers, consider useCallback
         setKeyWords(Object.keys(swapKeyVal(allCountries)));
-    }, []);
+    }, [allCountries]);
 
     const handleChanges = (e) => {
         setQuery(e.target.value);
@@ -53,12 +54,12 @@ const SearchBar = ({
 
         const list = [];
         countryIndexSet.forEach((i) => {
-            console.log(allCountries[i]);
             list.push(allCountries[i]);
         });
 
         setSelected([...list]);
-        setHistory([...history, ...list]);
+        // setHistory([...history, ...list]);
+        addHistory([...countryIndexSet]);
     };
 
     return (

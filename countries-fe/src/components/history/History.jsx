@@ -2,15 +2,32 @@ import React from 'react';
 
 import Details from '../details/Details';
 
+import { Droppable } from 'react-beautiful-dnd';
+
 import './history.scss';
 
-const History = ({ history }) => {
+const History = ({ history, allCountries }) => {
     return (
-        <div className='history'>
-            {history.map((country, index) => (
-                <Details key={index} country={country} />
-            ))}
-        </div>
+        <Droppable droppableId='history' isDropDisabled={true}>
+            {(provided) => (
+                <div
+                    className='history'
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}>
+                    {history.map(({ countryIndex, id }, index) => {
+                        return (
+                            <Details
+                                key={id}
+                                id={id}
+                                index={index}
+                                country={allCountries[countryIndex]}
+                            />
+                        );
+                    })}
+                    {provided.placeholder}
+                </div>
+            )}
+        </Droppable>
     );
 };
 
