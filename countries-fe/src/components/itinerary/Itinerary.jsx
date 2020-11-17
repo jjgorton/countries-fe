@@ -5,7 +5,7 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import './itinerary.scss';
 
-const Itinerary = ({ itinerary }) => {
+const Itinerary = ({ itinerary, allCountries }) => {
     return (
         <Droppable droppableId='itinerary'>
             {(provided) => (
@@ -13,14 +13,17 @@ const Itinerary = ({ itinerary }) => {
                     className='itinerary'
                     {...provided.droppableProps}
                     ref={provided.innerRef}>
-                    {itinerary.map((country, index) => (
-                        <Details
-                            key={`${Date.now()}`}
-                            id={`${Date.now()}`}
-                            index={index}
-                            country={country}
-                        />
-                    ))}
+                    {itinerary.map(({ countryIndex, id }, index) => {
+                        return (
+                            <Details
+                                key={id}
+                                id={id}
+                                index={index}
+                                country={allCountries[countryIndex]}
+                            />
+                        );
+                    })}
+                    {provided.placeholder}
                 </div>
             )}
         </Droppable>

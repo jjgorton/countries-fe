@@ -24,10 +24,19 @@ function App() {
             .catch((err) => console.error(err));
     }, []);
 
-    const closestCountry = (lat, lon) => {
-        let closest = { country: {}, dist: Infinity };
+    const addHistory = (countryIndexArr) => {
+        const arr = countryIndexArr.map((countryIndex) => {
+            const id = `${countryIndex + '-' + new Date().valueOf()}`;
 
-        allCountries.forEach((country) => {
+            return { countryIndex, id };
+        });
+        setHistory([...history, ...arr]);
+    };
+
+    const closestCountry = (lat, lon) => {
+        let closest = { countryName: '', countryIndex: '', dist: Infinity };
+
+        allCountries.forEach((country, index) => {
             const currDistance = distance(
                 lat,
                 country.latlng[0],
@@ -36,24 +45,56 @@ function App() {
             );
 
             if (currDistance < closest.dist)
-                closest = { country: country, dist: currDistance };
+                closest = {
+                    countryName: country.name,
+                    countryIndex: index,
+                    dist: currDistance,
+                };
         });
-        setHistory([...history, closest.country]);
+
+        addHistory([closest.countryIndex]);
+        // setHistory([...history, closest.country]);
         // setItinerary([...itinerary, closest.country]);
     };
 
+    const handleOnDragEnd = (res) => {
+        if (!res.destination) return;
+        console.log(res);
+        const draggedCountryIndex = {
+            countryIndex: res.draggableId.split('-')[0] * 1,
+            id: res.draggableId,
+        };
+
+        const itineraryCopy = [...itinerary];
+        const historyCopy = [...history];
+
+        if (res.source.droppableId === 'itinerary') {
+            itineraryCopy.splice(res.source.index, 1);
+            console.log('if', itineraryCopy);
+        } else if (res.source.droppableId === 'history') {
+            historyCopy[res.source.index].id += Date.now();
+            setHistory(historyCopy);
+        }
+        itineraryCopy.splice(res.destination.index, 0, draggedCountryIndex);
+
+        console.log(itineraryCopy);
+
+        setItinerary(itineraryCopy);
+    };
+
     return (
-        <DragDropContext>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
             <div className='App'>
-                <History history={history} />
+                <History history={history} allCountries={allCountries} />
                 <SearchBar
                     allCountries={allCountries}
                     selected={selected}
                     setSelected={setSelected}
                     history={history}
                     setHistory={setHistory}
+                    addHistory={addHistory}
                 />
-                <Itinerary itinerary={itinerary} />
+                <Itinerary itinerary={itinerary} allCountries={allCountries} />
                 <Map closestCountry={closestCountry} />
             </div>
         </DragDropContext>

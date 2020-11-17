@@ -6,7 +6,7 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import './history.scss';
 
-const History = ({ history }) => {
+const History = ({ history, allCountries }) => {
     return (
         <Droppable droppableId='history'>
             {(provided) => (
@@ -14,14 +14,16 @@ const History = ({ history }) => {
                     className='history'
                     {...provided.droppableProps}
                     ref={provided.innerRef}>
-                    {history.map((country, index) => (
-                        <Details
-                            key={`${country + index + Date.now()}`}
-                            id={`${Date.now()}`}
-                            index={index}
-                            country={country}
-                        />
-                    ))}
+                    {history.map(({ countryIndex, id }, index) => {
+                        return (
+                            <Details
+                                key={id}
+                                id={id}
+                                index={index}
+                                country={allCountries[countryIndex]}
+                            />
+                        );
+                    })}
                     {provided.placeholder}
                 </div>
             )}
