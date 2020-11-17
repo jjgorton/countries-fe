@@ -5,6 +5,30 @@
     min-height: fit-content;
     overflow-y: scroll;
     margin-top: 25vh;
-    background: navy;
-    border: 15px outset gray;
+    background: rgb(5, 5, 48);
+    border: 15px outset goldenrod;
+}
+
+//custom scroll bar style
+.itinerary::-webkit-scrollbar {
+    width: 15px;
+    border: 5px outset rgb(194, 149, 4);
+}
+
+/* Track */
+.itinerary::-webkit-scrollbar-track {
+    background: none;
+    margin: 10px;
+}
+
+/* Handle */
+.itinerary::-webkit-scrollbar-thumb {
+    background: #aa7d03;
+    border: 3px inset orange;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+.itinerary::-webkit-scrollbar-thumb:hover {
+    background: #725504;
 }
