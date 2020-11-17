@@ -53,31 +53,31 @@ function App() {
         });
 
         addHistory([closest.countryIndex]);
-        // setHistory([...history, closest.country]);
-        // setItinerary([...itinerary, closest.country]);
     };
 
     const handleOnDragEnd = (res) => {
-        if (!res.destination) return;
-        console.log(res);
+        if (!res.destination || res.destination.droppableId !== 'itinerary')
+            return;
+
         const draggedCountryIndex = {
             countryIndex: res.draggableId.split('-')[0] * 1,
             id: res.draggableId,
         };
 
         const itineraryCopy = [...itinerary];
-        const historyCopy = [...history];
 
         if (res.source.droppableId === 'itinerary') {
             itineraryCopy.splice(res.source.index, 1);
-            console.log('if', itineraryCopy);
         } else if (res.source.droppableId === 'history') {
+            const historyCopy = [...history];
+
+            //change dragged id in the copy and move to end
             historyCopy[res.source.index].id += Date.now();
+            historyCopy.push(historyCopy.splice(res.source.index, 1)[0]);
+
             setHistory(historyCopy);
         }
         itineraryCopy.splice(res.destination.index, 0, draggedCountryIndex);
-
-        console.log(itineraryCopy);
 
         setItinerary(itineraryCopy);
     };

@@ -8,7 +8,7 @@ import './history.scss';
 
 const History = ({ history, allCountries }) => {
     return (
-        <Droppable droppableId='history'>
+        <Droppable droppableId='history' isDropDisabled={true}>
             {(provided) => (
                 <div
                     className='history'
