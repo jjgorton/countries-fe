@@ -1,10 +1,81 @@
 @import '../../global_styles/';
 
-.itinerary {
+.itinerary-container {
     z-index: 1;
+    // margin-top: 25vh;
+    min-width: 35rem;
     min-height: fit-content;
+    transition: transform 1s;
+
+    .title {
+        display: flex;
+        align-items: center;
+        background: $bronze;
+        height: 4rem;
+        border: 5px inset goldenrod;
+        .slide-icon {
+            width: 6rem;
+            height: 6rem;
+            font-size: 5rem;
+            color: rgb(163, 118, 3);
+            background: $bronze;
+            border: 5px outset goldenrod;
+            border-radius: 50%;
+            padding: 10px;
+            transform: translate(-3rem, -0rem);
+            z-index: 2;
+
+            &:hover {
+                cursor: pointer;
+                color: rgb(209, 179, 103);
+                background: rgb(255, 225, 148);
+            }
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: goldenrod;
+            text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.349),
+                1px 1px 1px rgba(0, 0, 0, 0.274);
+            // margin-left: 4rem;
+        }
+    }
+}
+
+.hide {
+    transform: translateX(32rem);
+}
+
+.itinerary {
+    min-height: 65vh;
+    height: 65vh;
     overflow-y: scroll;
-    margin-top: 25vh;
-    background: navy;
-    border: 15px outset gray;
+    background: rgb(5, 5, 48);
+    border: 15px outset goldenrod;
+    border-top: none;
+    border-left: 30px outset goldenrod;
+}
+
+//custom scroll bar style
+.itinerary::-webkit-scrollbar {
+    width: 15px;
+    border: 5px outset rgb(194, 149, 4);
+}
+
+/* Track */
+.itinerary::-webkit-scrollbar-track {
+    background: none;
+    margin: 5px;
+}
+
+/* Handle */
+.itinerary::-webkit-scrollbar-thumb {
+    background: #aa7d03;
+    border: 3px inset orange;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+.itinerary::-webkit-scrollbar-thumb:hover {
+    background: #725504;
 }

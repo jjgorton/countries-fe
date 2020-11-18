@@ -1,26 +1,75 @@
 @import '../../global_styles/';
 
+.details-container {
+    margin: 1rem;
+    z-index: 2;
+}
+
 .details {
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    height: 20rem;
-    z-index: 1;
+    justify-content: center;
+    width: 30rem;
+    height: 10rem;
     background-image: $bronze;
-    border: 2.5rem inset goldenrod;
-    margin: 1rem;
+    border: 1.5rem inset goldenrod;
+    // border-radius: 15px;
+
+    transition: transform 0.25s linear;
+
     h1 {
-        font-size: 4rem;
-        font-weight: 900;
+        font-size: 2.5rem;
+        font-weight: 700;
         text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.349),
             1px 1px 1px rgba(0, 0, 0, 0.274);
         color: goldenrod;
-        padding: 2rem;
+        padding: 1rem;
+    }
+}
+.info-container {
+    transform: rotateX(180deg);
+    border: none;
+    padding: 5px 1rem; //flipped
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding-left: 2rem;
+        p {
+            transform: rotateX(180deg);
+            font-size: 1.3rem;
+            color: navy;
+        }
+    }
+}
+
+.flip-icon {
+    font-size: 3rem;
+    color: rgb(10, 17, 82);
+    background: whitesmoke;
+    border-radius: 50%;
+    padding: 5px;
+
+    transform: translate(-0.7rem, -2rem) rotateZ(0deg);
+    transition: all 0.25s linear;
+
+    &:hover {
+        animation: wiggle 0.15s linear 3;
+        cursor: pointer;
+        // transform: translate(-1rem, -1rem);
+        // transform: rotateZ(60deg);
     }
 
-    p {
-        font-size: 1.3rem;
-        color: navy;
-        padding: 1rem;
+    @keyframes wiggle {
+        from {
+        }
+        50% {
+            transform: translate(-0.7rem, -2rem) rotateZ(60deg);
+        }
+        to {
+            transform: translate(-0.7rem, -2rem) rotateZ(0deg);
+        }
     }
 }
