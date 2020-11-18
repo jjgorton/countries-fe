@@ -12,7 +12,7 @@ import { Droppable } from 'react-beautiful-dnd';
 import './itinerary.scss';
 
 const Itinerary = ({ itinerary, allCountries }) => {
-    const [showItinerary, setShowItinerary] = useState(true);
+    const [showItinerary, setShowItinerary] = useState(false);
 
     return (
         <div className={`itinerary-container ${!showItinerary && 'hide'}`}>
