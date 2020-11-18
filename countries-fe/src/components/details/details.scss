@@ -2,7 +2,7 @@
 
 .details-container {
     margin: 1rem;
-    z-index: 1;
+    z-index: 2;
 }
 
 .details {
@@ -25,20 +25,24 @@
         color: goldenrod;
         padding: 1rem;
     }
-
-    p {
-        font-size: 1.3rem;
-        color: navy;
-        padding: 1rem;
-    }
 }
-.info {
+.info-container {
     transform: rotateX(180deg);
-    p {
-        transform: rotateX(180deg);
-    }
-
     border: none;
+    padding: 5px 1rem; //flipped
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding-left: 2rem;
+        p {
+            transform: rotateX(180deg);
+            font-size: 1.3rem;
+            color: navy;
+        }
+    }
 }
 
 .flip-icon {
