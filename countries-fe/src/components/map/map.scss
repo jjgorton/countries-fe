@@ -4,11 +4,19 @@
     position: absolute;
 
     .marker {
+        transform: translateY(-3rem);
+        transition: transform 0.25s;
+
+        &:hover {
+            transform: translateY(-3rem) scale(1.2);
+        }
+
+        cursor: pointer;
         .order {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 3.3rem;
+            width: 3.4rem;
             height: 3.5rem;
             font-size: 2.5rem;
             background: $bronze;

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import { autoComplete, swapKeyVal } from '../../utils';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearchLocation } from '@fortawesome/free-solid-svg-icons';
+
 import './searchBar.scss';
 
 const SearchBar = ({ allCountries, setSelected, addHistory }) => {
@@ -58,7 +61,9 @@ const SearchBar = ({ allCountries, setSelected, addHistory }) => {
                 onKeyDown={handleKeys}
             />
             <div className='auto-complete'>{suggestion}</div>
-            <button>Search</button>
+            <button>
+                <FontAwesomeIcon icon={faSearchLocation} />
+            </button>
         </form>
     );
 };
