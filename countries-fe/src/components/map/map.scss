@@ -1,3 +1,40 @@
+@import '../../global_styles/';
+
 .map {
     position: absolute;
+
+    .marker {
+        transform: translateY(-3rem);
+        transition: transform 0.25s;
+
+        &:hover {
+            transform: translateY(-3rem) scale(1.2);
+        }
+
+        cursor: pointer;
+        .order {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 3.4rem;
+            height: 3.5rem;
+            font-size: 2.5rem;
+            background: $bronze;
+            color: rgb(122, 104, 52);
+            border-radius: 50%;
+            border: 1px solid goldenrod;
+            z-index: 1;
+        }
+
+        .point {
+            box-shadow: rgba(15, 15, 15, 0.452) -5px -5px 5px 10px;
+            width: 2.5rem;
+            height: 2.5rem;
+            transform: rotateZ(45deg) translate(-1.15rem, -1.85rem)
+                skew(7deg, 7deg);
+            background: $bronze;
+            z-index: -1;
+            position: relative; // needed for z-index
+        }
+    }
 }

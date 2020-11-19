@@ -12,7 +12,7 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import './history.scss';
 
-const History = ({ history, allCountries }) => {
+const History = ({ history, allCountries, setSelected }) => {
     const [showHistory, setShowHistory] = useState(false);
 
     return (
@@ -38,6 +38,8 @@ const History = ({ history, allCountries }) => {
                                     id={id}
                                     index={index}
                                     country={allCountries[countryIndex]}
+                                    setSelected={setSelected}
+                                    countryIndex={countryIndex}
                                 />
                             );
                         })}

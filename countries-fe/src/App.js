@@ -8,13 +8,13 @@ import SearchBar from './components/search/SearchBar';
 import History from './components/history/History';
 import Itinerary from './components/itinerary/Itinerary';
 
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import './app.scss';
 
 function App() {
     const [allCountries, setAllCountries] = useState([{}]);
-    const [selected, setSelected] = useState([{}]);
+    const [selected, setSelected] = useState([]);
     const [history, setHistory] = useState([]);
     const [itinerary, setItinerary] = useState([]);
 
@@ -52,50 +52,78 @@ function App() {
                 };
         });
 
+        setSelected([closest.countryIndex]);
         addHistory([closest.countryIndex]);
     };
 
-    const handleOnDragEnd = (res) => {
-        if (!res.destination || res.destination.droppableId !== 'itinerary')
-            return;
-
-        const draggedCountryIndex = {
-            countryIndex: res.draggableId.split('-')[0] * 1,
-            id: res.draggableId,
-        };
+    const handleOnDragEnd = ({ source, destination, draggableId }) => {
+        if (!destination) return;
 
         const itineraryCopy = [...itinerary];
+        const draggedCountryIndex = {
+            countryIndex: draggableId.split('-')[0] * 1,
+            id: draggableId,
+        };
 
-        if (res.source.droppableId === 'itinerary') {
-            itineraryCopy.splice(res.source.index, 1);
-        } else if (res.source.droppableId === 'history') {
+        if (source.droppableId === 'itinerary') {
+            itineraryCopy.splice(source.index, 1);
+
+            if (destination.droppableId === 'itinerary') {
+                itineraryCopy.splice(destination.index, 0, draggedCountryIndex);
+            }
+
+            setItinerary(itineraryCopy);
+        } else if (source.droppableId === 'history') {
             const historyCopy = [...history];
 
-            //change dragged id in the copy and move to end
-            historyCopy[res.source.index].id += Date.now();
-            historyCopy.push(historyCopy.splice(res.source.index, 1)[0]);
+            if (destination.droppableId === 'itinerary') {
+                //change dragged id in the copy and move to end
+                historyCopy[source.index].id += Date.now();
+                itineraryCopy.splice(destination.index, 0, draggedCountryIndex);
+                setItinerary(itineraryCopy);
+            } else if (destination.droppableId === 'trash') {
+                historyCopy.splice(source.index, 1);
+            }
 
             setHistory(historyCopy);
         }
-        itineraryCopy.splice(res.destination.index, 0, draggedCountryIndex);
-
-        setItinerary(itineraryCopy);
     };
 
     return (
         <DragDropContext onDragEnd={handleOnDragEnd}>
             <div className='App'>
-                <History history={history} allCountries={allCountries} />
+                <History
+                    history={history}
+                    allCountries={allCountries}
+                    setSelected={setSelected}
+                />
                 <SearchBar
                     allCountries={allCountries}
-                    selected={selected}
                     setSelected={setSelected}
-                    history={history}
-                    setHistory={setHistory}
                     addHistory={addHistory}
                 />
-                <Itinerary itinerary={itinerary} allCountries={allCountries} />
-                <Map closestCountry={closestCountry} />
+                <Droppable droppableId='trash'>
+                    {(provided) => (
+                        <div
+                            className='trash'
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}>
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+                <Itinerary
+                    itinerary={itinerary}
+                    allCountries={allCountries}
+                    setSelected={setSelected}
+                />
+                <Map
+                    closestCountry={closestCountry}
+                    allCountries={allCountries}
+                    itinerary={itinerary}
+                    selected={selected}
+                    setSelected={setSelected}
+                />
             </div>
         </DragDropContext>
     );
