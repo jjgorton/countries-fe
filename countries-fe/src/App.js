@@ -14,7 +14,7 @@ import './app.scss';
 
 function App() {
     const [allCountries, setAllCountries] = useState([{}]);
-    const [selected, setSelected] = useState([{}]);
+    const [selected, setSelected] = useState([]);
     const [history, setHistory] = useState([]);
     const [itinerary, setItinerary] = useState([]);
 
@@ -98,10 +98,7 @@ function App() {
                 <History history={history} allCountries={allCountries} />
                 <SearchBar
                     allCountries={allCountries}
-                    selected={selected}
                     setSelected={setSelected}
-                    history={history}
-                    setHistory={setHistory}
                     addHistory={addHistory}
                 />
                 <Droppable droppableId='trash'>
@@ -115,7 +112,12 @@ function App() {
                     )}
                 </Droppable>
                 <Itinerary itinerary={itinerary} allCountries={allCountries} />
-                <Map closestCountry={closestCountry} />
+                <Map
+                    closestCountry={closestCountry}
+                    allCountries={allCountries}
+                    itinerary={itinerary}
+                    selected={selected}
+                />
             </div>
         </DragDropContext>
     );

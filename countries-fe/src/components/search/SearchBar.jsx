@@ -4,14 +4,7 @@ import { autoComplete, swapKeyVal } from '../../utils';
 
 import './searchBar.scss';
 
-const SearchBar = ({
-    allCountries,
-    selected,
-    setSelected,
-    history,
-    setHistory,
-    addHistory,
-}) => {
+const SearchBar = ({ allCountries, setSelected, addHistory }) => {
     const [query, setQuery] = useState('');
     const [suggestion, setSuggestion] = useState('');
     const [keyWords, setKeyWords] = useState([]);
@@ -52,13 +45,7 @@ const SearchBar = ({
             return;
         }
 
-        const list = [];
-        countryIndexSet.forEach((i) => {
-            list.push(allCountries[i]);
-        });
-
-        setSelected([...list]);
-        // setHistory([...history, ...list]);
+        setSelected([...countryIndexSet]);
         addHistory([...countryIndexSet]);
     };
 
