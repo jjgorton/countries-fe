@@ -11,7 +11,7 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import './itinerary.scss';
 
-const Itinerary = ({ itinerary, allCountries }) => {
+const Itinerary = ({ itinerary, allCountries, setSelected }) => {
     const [showItinerary, setShowItinerary] = useState(false);
 
     return (
@@ -37,6 +37,8 @@ const Itinerary = ({ itinerary, allCountries }) => {
                                     id={id}
                                     index={index}
                                     country={allCountries[countryIndex]}
+                                    setSelected={setSelected}
+                                    countryIndex={countryIndex}
                                 />
                             );
                         })}

@@ -52,14 +52,12 @@ function App() {
                 };
         });
 
+        setSelected([closest.countryIndex]);
         addHistory([closest.countryIndex]);
     };
 
     const handleOnDragEnd = ({ source, destination, draggableId }) => {
-        console.log({ source, destination, draggableId });
-        if (!destination)
-            // || destination.droppableId !== 'itinerary'
-            return;
+        if (!destination) return;
 
         const itineraryCopy = [...itinerary];
         const draggedCountryIndex = {
@@ -83,7 +81,6 @@ function App() {
                 historyCopy[source.index].id += Date.now();
                 itineraryCopy.splice(destination.index, 0, draggedCountryIndex);
                 setItinerary(itineraryCopy);
-                // historyCopy.push(historyCopy.splice(source.index, 1)[0]);
             } else if (destination.droppableId === 'trash') {
                 historyCopy.splice(source.index, 1);
             }
@@ -95,7 +92,11 @@ function App() {
     return (
         <DragDropContext onDragEnd={handleOnDragEnd}>
             <div className='App'>
-                <History history={history} allCountries={allCountries} />
+                <History
+                    history={history}
+                    allCountries={allCountries}
+                    setSelected={setSelected}
+                />
                 <SearchBar
                     allCountries={allCountries}
                     setSelected={setSelected}
@@ -111,12 +112,17 @@ function App() {
                         </div>
                     )}
                 </Droppable>
-                <Itinerary itinerary={itinerary} allCountries={allCountries} />
+                <Itinerary
+                    itinerary={itinerary}
+                    allCountries={allCountries}
+                    setSelected={setSelected}
+                />
                 <Map
                     closestCountry={closestCountry}
                     allCountries={allCountries}
                     itinerary={itinerary}
                     selected={selected}
+                    setSelected={setSelected}
                 />
             </div>
         </DragDropContext>
