@@ -21,7 +21,6 @@ const Map = ({
     };
 
     const areaZoom = (index) => {
-        // const area = allCountries[index] ? allCountries[index].area / 1000 : 0;
         const area = index.reduce((a, b) => {
             const sqKM = allCountries[b] ? allCountries[b].area / 1000 : 0;
             return a + sqKM;
@@ -80,10 +79,7 @@ const Map = ({
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
                 mapStyle='mapbox://styles/jjgorton/ckhgy8lt90trq19q7hnrgps0e'
                 onClick={(e) => closestCountry(e.lngLat[1], e.lngLat[0])}
-                onViewportChange={(viewChange) => {
-                    console.log(viewport);
-                    setViewport(viewChange);
-                }}>
+                onViewportChange={(viewChange) => setViewport(viewChange)}>
                 {selected.map((countryIndex, index) => (
                     <Marker
                         key={index}
@@ -92,10 +88,6 @@ const Map = ({
                         <div
                             className='marker'
                             onClick={() => setSelected([countryIndex])}>
-                            {/* <FontAwesomeIcon
-                            icon={faMapMarkerAlt}
-                            className='marker'
-                            /> */}
                             <div className='order'>
                                 <FontAwesomeIcon icon={faSearchPlus} />
                             </div>
@@ -111,10 +103,6 @@ const Map = ({
                         <div
                             className='marker'
                             onClick={() => setSelected([countryIndex])}>
-                            {/* <FontAwesomeIcon
-                            icon={faMapMarkerAlt}
-                            className='marker'
-                            /> */}
                             <div className='order'>{index + 1}</div>
                             <div className='point'></div>
                         </div>
