@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, FlyToInterpolator } from 'react-map-gl';
+import { easeCubic } from 'd3-ease';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearchPlus } from '@fortawesome/free-solid-svg-icons';
@@ -20,7 +21,11 @@ const Map = ({
     };
 
     const areaZoom = (index) => {
-        const area = allCountries[index] ? allCountries[index].area / 1000 : 0;
+        // const area = allCountries[index] ? allCountries[index].area / 1000 : 0;
+        const area = index.reduce((a, b) => {
+            const sqKM = allCountries[b] ? allCountries[b].area / 1000 : 0;
+            return a + sqKM;
+        }, 0);
 
         let zoom = 1.5;
 
@@ -44,12 +49,24 @@ const Map = ({
 
     useEffect(() => {
         if (selected.length === 1) {
-            areaZoom(selected);
             setViewport({
                 ...viewport,
                 latitude: latLong(selected)[0],
                 longitude: latLong(selected)[1],
                 zoom: areaZoom(selected),
+                transitionDuration: 5000,
+                transitionInterpolator: new FlyToInterpolator(),
+                transitionEasing: easeCubic,
+            });
+        } else {
+            setViewport({
+                ...viewport,
+                latitude: latLong(selected)[0],
+                longitude: latLong(selected)[1],
+                zoom: 1.5,
+                transitionDuration: 5000,
+                transitionInterpolator: new FlyToInterpolator(),
+                transitionEasing: easeCubic,
             });
         }
     }, [selected]);

@@ -6,3 +6,5 @@ export const distance = (
 ) => {
     return Math.sqrt((lat2 - lat1) ** 2 + (lon2 - lon1) ** 2);
 };
+
+// https://www.geeksforgeeks.org/program-distance-two-points-earth/

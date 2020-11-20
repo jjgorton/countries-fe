@@ -48,6 +48,7 @@ const SearchBar = ({ allCountries, setSelected, addHistory }) => {
             return;
         }
 
+        console.log(countryIndexSet);
         setSelected([...countryIndexSet]);
         addHistory([...countryIndexSet]);
     };
