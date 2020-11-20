@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, FlyToInterpolator } from 'react-map-gl';
+import { easeCubic } from 'd3-ease';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearchPlus } from '@fortawesome/free-solid-svg-icons';
@@ -20,7 +21,10 @@ const Map = ({
     };
 
     const areaZoom = (index) => {
-        const area = allCountries[index] ? allCountries[index].area / 1000 : 0;
+        const area = index.reduce((a, b) => {
+            const sqKM = allCountries[b] ? allCountries[b].area / 1000 : 0;
+            return a + sqKM;
+        }, 0);
 
         let zoom = 1.5;
 
@@ -44,12 +48,24 @@ const Map = ({
 
     useEffect(() => {
         if (selected.length === 1) {
-            areaZoom(selected);
             setViewport({
                 ...viewport,
                 latitude: latLong(selected)[0],
                 longitude: latLong(selected)[1],
                 zoom: areaZoom(selected),
+                transitionDuration: 5000,
+                transitionInterpolator: new FlyToInterpolator(),
+                transitionEasing: easeCubic,
+            });
+        } else {
+            setViewport({
+                ...viewport,
+                latitude: latLong(selected)[0],
+                longitude: latLong(selected)[1],
+                zoom: 1.5,
+                transitionDuration: 5000,
+                transitionInterpolator: new FlyToInterpolator(),
+                transitionEasing: easeCubic,
             });
         }
     }, [selected]);
@@ -63,10 +79,7 @@ const Map = ({
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
                 mapStyle='mapbox://styles/jjgorton/ckhgy8lt90trq19q7hnrgps0e'
                 onClick={(e) => closestCountry(e.lngLat[1], e.lngLat[0])}
-                onViewportChange={(viewChange) => {
-                    console.log(viewport);
-                    setViewport(viewChange);
-                }}>
+                onViewportChange={(viewChange) => setViewport(viewChange)}>
                 {selected.map((countryIndex, index) => (
                     <Marker
                         key={index}
@@ -75,10 +88,6 @@ const Map = ({
                         <div
                             className='marker'
                             onClick={() => setSelected([countryIndex])}>
-                            {/* <FontAwesomeIcon
-                            icon={faMapMarkerAlt}
-                            className='marker'
-                            /> */}
                             <div className='order'>
                                 <FontAwesomeIcon icon={faSearchPlus} />
                             </div>
@@ -94,10 +103,6 @@ const Map = ({
                         <div
                             className='marker'
                             onClick={() => setSelected([countryIndex])}>
-                            {/* <FontAwesomeIcon
-                            icon={faMapMarkerAlt}
-                            className='marker'
-                            /> */}
                             <div className='order'>{index + 1}</div>
                             <div className='point'></div>
                         </div>

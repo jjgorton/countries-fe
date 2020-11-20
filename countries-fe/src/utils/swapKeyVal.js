@@ -3,7 +3,7 @@ export const swapKeyVal = (arr) => {
 
     function recurse(val, index) {
         if (typeof val !== 'object') {
-            val = typeof val === 'string' ? val.toLocaleLowerCase() : val;
+            val = typeof val === 'string' ? val.toLowerCase() : val;
             if (countryTable[val]) {
                 countryTable[val].add(index);
             } else {

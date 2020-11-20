@@ -38,7 +38,7 @@ const SearchBar = ({ allCountries, setSelected, addHistory }) => {
         setSuggestion('');
         setQuery('');
 
-        const countryIndexSet = swapKeyVal(allCountries)[query];
+        const countryIndexSet = swapKeyVal(allCountries)[query.toLowerCase()];
 
         if (!countryIndexSet) {
             alert(
@@ -48,6 +48,7 @@ const SearchBar = ({ allCountries, setSelected, addHistory }) => {
             return;
         }
 
+        console.log(countryIndexSet);
         setSelected([...countryIndexSet]);
         addHistory([...countryIndexSet]);
     };

@@ -1,11 +1,11 @@
 export const autoComplete = (query, arr) => {
-    const str = `${query}`.toLocaleLowerCase();
+    const str = `${query}`.toLowerCase();
 
     if (!str.length) return [];
 
     const option = arr.filter(
         (val) =>
-            `${val}`.toLocaleLowerCase().startsWith(str) &&
+            `${val}`.toLowerCase().startsWith(str) &&
             str.length < `${val}`.length
     )[0];
 
