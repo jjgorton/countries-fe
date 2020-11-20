@@ -1,0 +1,11 @@
+@import '../../global_styles/';
+
+.menu {
+    position: absolute;
+    bottom: 75vh;
+    z-index: 1;
+
+    .download {
+        font-size: 5rem;
+    }
+}
