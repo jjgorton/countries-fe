@@ -7,6 +7,7 @@ import Map from './components/map/Map';
 import SearchBar from './components/search/SearchBar';
 import History from './components/history/History';
 import Itinerary from './components/itinerary/Itinerary';
+import Menu from './components/menu/Menu';
 
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
@@ -92,6 +93,12 @@ function App() {
     return (
         <DragDropContext onDragEnd={handleOnDragEnd}>
             <div className='App'>
+                <Menu
+                    history={history}
+                    setHistory={setHistory}
+                    itinerary={itinerary}
+                    setItinerary={setItinerary}
+                />
                 <History
                     history={history}
                     allCountries={allCountries}

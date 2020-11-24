@@ -1,0 +1,132 @@
+@import '../../global_styles/';
+
+.menu-container {
+    position: absolute;
+    bottom: 75vh;
+    z-index: 1;
+    width: 15rem;
+    min-height: fit-content;
+    transition: transform 1s;
+
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: $bronze;
+        height: 4rem;
+        border: 5px inset goldenrod;
+        .slide-icon {
+            width: 6rem;
+            height: 6rem;
+            font-size: 5rem;
+            color: rgb(163, 118, 3);
+            background: $bronze;
+            border: 5px outset goldenrod;
+            border-radius: 50%;
+            padding: 10px;
+            transform: translate(3rem, -0rem);
+            z-index: 2;
+
+            &:hover {
+                cursor: pointer;
+                color: rgb(209, 179, 103);
+                background: rgb(255, 225, 148);
+            }
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: goldenrod;
+            text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.349),
+                1px 1px 1px rgba(0, 0, 0, 0.274);
+            margin-left: 4rem;
+        }
+    }
+
+    .menu {
+        display: flex;
+        background: $bronze;
+        border: 5px outset goldenrod;
+        border-top: none;
+        border-radius: 0 0 15px 0;
+        .download-container {
+            margin: 5px;
+            .link {
+                // background: rgba(255, 192, 203, 0.527); //positioning
+                background: none;
+                border-radius: 50%;
+                width: 6rem;
+                height: 6rem;
+                position: absolute;
+                margin: none; //overwrite DownloadLink styles
+            }
+            .download {
+                width: 6rem;
+                height: 6rem;
+                font-size: 1rem;
+                color: rgb(163, 118, 3);
+                background: $bronze;
+                border: 5px outset goldenrod;
+                border-radius: 50%;
+                padding: 10px;
+                // transform: translate(3rem, -0rem);
+                // z-index: 2;
+
+                // &:hover {
+                //     cursor: pointer;
+                //     color: rgb(209, 179, 103);
+                //     background: rgb(255, 225, 148);
+                // }
+
+                //.load-icon-->
+                font-size: 3rem;
+                color: rgb(163, 118, 3);
+            }
+            .fakeHover {
+                cursor: pointer;
+                color: rgb(209, 179, 103);
+                background: rgb(255, 225, 148);
+            }
+        }
+        .upload {
+            margin: 5px;
+            width: 6rem;
+            height: 6rem;
+            font-size: 3rem;
+            color: rgb(163, 118, 3);
+            background: $bronze;
+            border: 5px outset goldenrod;
+            border-radius: 50%;
+            padding: 10px;
+            // transform: translate(3rem, -0rem);
+            // z-index: 2;
+
+            &:hover {
+                cursor: pointer;
+                color: rgb(209, 179, 103);
+                background: rgb(255, 225, 148);
+            }
+            // .load-icon {
+            //     font-size: 3rem;
+            //     color: rgb(163, 118, 3);
+            // }
+        }
+        // input {
+        //     width: 6rem;
+        //     height: 6rem;
+        //     font-size: 5rem;
+        //     color: none;
+        //     background: rgba(255, 192, 203, 0.671);
+        //     border-radius: 50%;
+        //     padding: 10px;
+
+        // }
+        input {
+            display: none;
+        }
+    }
+}
+
+.hide-menu {
+    transform: translateX(-13.5rem);
+}
