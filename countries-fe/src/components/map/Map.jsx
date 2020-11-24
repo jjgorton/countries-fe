@@ -44,33 +44,26 @@ const Map = ({
         latitude: 37.7577,
         longitude: -122.4376,
         zoom: 1.5,
+        transitionDuration: 5000,
+        transitionInterpolator: new FlyToInterpolator(),
+        transitionEasing: easeCubic,
     });
 
     useEffect(() => {
-        if (selected.length === 1) {
+        if (selected.length) {
             setViewport({
                 ...viewport,
-                latitude: latLong(selected)[0],
-                longitude: latLong(selected)[1],
+                latitude: latLong(selected[0])[0],
+                longitude: latLong(selected[0])[1],
                 zoom: areaZoom(selected),
                 transitionDuration: 5000,
                 transitionInterpolator: new FlyToInterpolator(),
                 transitionEasing: easeCubic,
             });
         } else {
-            setViewport({
-                ...viewport,
-                latitude: latLong(selected)[0],
-                longitude: latLong(selected)[1],
-                zoom: 1.5,
-                transitionDuration: 5000,
-                transitionInterpolator: new FlyToInterpolator(),
-                transitionEasing: easeCubic,
-            });
+            setViewport(viewport);
         }
     }, [selected]);
-
-    // console.log(selected);
 
     return (
         <div className='map'>
