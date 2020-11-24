@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import DownloadLink from 'react-download-link';
 
@@ -15,6 +15,8 @@ import './menu.scss';
 const Menu = ({ history, setHistory, itinerary, setItinerary }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [hover, setHover] = useState(false);
+
+    const inputRef = useRef(null);
 
     const handleUpload = (e) => {
         const uploadedFile = e.target.files[0];
@@ -60,15 +62,21 @@ const Menu = ({ history, setHistory, itinerary, setItinerary }) => {
                     <div className={`download ${hover && 'fakeHover'}`}>
                         <FontAwesomeIcon
                             icon={faDownload}
-                            className='load-icon'
+                            className='load-icon '
                         />
                     </div>
                 </div>
-                <form className='upload'>
+                <div
+                    className='upload'
+                    onClick={() => inputRef.current.click()}>
                     <FontAwesomeIcon icon={faUpload} className='load-icon' />
-                    <input type='file' onInput={handleUpload} accept='.txt' />
-                    <button>Load</button>
-                </form>
+                    <input
+                        ref={inputRef}
+                        type='file'
+                        onInput={handleUpload}
+                        accept='.txt'
+                    />
+                </div>
             </div>
         </div>
     );

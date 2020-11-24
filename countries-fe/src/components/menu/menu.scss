@@ -50,6 +50,7 @@
         border-top: none;
         border-radius: 0 0 15px 0;
         .download-container {
+            margin: 5px;
             .link {
                 // background: rgba(255, 192, 203, 0.527); //positioning
                 background: none;
@@ -88,9 +89,10 @@
             }
         }
         .upload {
+            margin: 5px;
             width: 6rem;
             height: 6rem;
-            font-size: 5rem;
+            font-size: 3rem;
             color: rgb(163, 118, 3);
             background: $bronze;
             border: 5px outset goldenrod;
@@ -104,20 +106,27 @@
                 color: rgb(209, 179, 103);
                 background: rgb(255, 225, 148);
             }
-            .load-icon {
-                font-size: 3rem;
-                color: rgb(163, 118, 3);
-            }
+            // .load-icon {
+            //     font-size: 3rem;
+            //     color: rgb(163, 118, 3);
+            // }
         }
         // input {
-        //     display: none;
+        //     width: 6rem;
+        //     height: 6rem;
+        //     font-size: 5rem;
+        //     color: none;
+        //     background: rgba(255, 192, 203, 0.671);
+        //     border-radius: 50%;
+        //     padding: 10px;
+
         // }
-        button {
-            font-size: 1rem;
+        input {
+            display: none;
         }
     }
 }
 
 .hide-menu {
-    transform: translateX(-13rem);
+    transform: translateX(-13.5rem);
 }
