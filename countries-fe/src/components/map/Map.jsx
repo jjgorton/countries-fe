@@ -61,7 +61,15 @@ const Map = ({
                 transitionEasing: easeCubic,
             });
         } else {
-            setViewport(viewport);
+            setViewport({
+                ...viewport,
+                latitude: 37.7577,
+                longitude: -122.4376,
+                zoom: 1.5,
+                transitionDuration: 5000,
+                transitionInterpolator: new FlyToInterpolator(),
+                transitionEasing: easeCubic,
+            });
         }
     }, [selected]);
 
