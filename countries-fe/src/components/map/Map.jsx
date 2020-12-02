@@ -50,7 +50,7 @@ const Map = ({
     });
 
     useEffect(() => {
-        if (selected.length) {
+        if (selected && selected.length) {
             setViewport({
                 ...viewport,
                 latitude: latLong(selected[0])[0],
@@ -74,41 +74,43 @@ const Map = ({
     }, [selected]);
 
     return (
-        <div className='map'>
+        <div className='map' data-testid='mapbox'>
             <ReactMapGL
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
                 mapStyle='mapbox://styles/jjgorton/ckhgy8lt90trq19q7hnrgps0e'
                 onClick={(e) => closestCountry(e.lngLat[1], e.lngLat[0])}
                 onViewportChange={(viewChange) => setViewport(viewChange)}>
-                {selected.map((countryIndex, index) => (
-                    <Marker
-                        key={index}
-                        latitude={latLong(countryIndex)[0]}
-                        longitude={latLong(countryIndex)[1]}>
-                        <div
-                            className='marker'
-                            onClick={() => setSelected([countryIndex])}>
-                            <div className='order'>
-                                <FontAwesomeIcon icon={faSearchPlus} />
+                {selected &&
+                    selected.map((countryIndex, index) => (
+                        <Marker
+                            key={index}
+                            latitude={latLong(countryIndex)[0]}
+                            longitude={latLong(countryIndex)[1]}>
+                            <div
+                                className='marker'
+                                onClick={() => setSelected([countryIndex])}>
+                                <div className='order'>
+                                    <FontAwesomeIcon icon={faSearchPlus} />
+                                </div>
+                                <div className='point'></div>
                             </div>
-                            <div className='point'></div>
-                        </div>
-                    </Marker>
-                ))}
-                {itinerary.map(({ countryIndex, id }, index) => (
-                    <Marker
-                        key={id}
-                        latitude={latLong(countryIndex)[0]}
-                        longitude={latLong(countryIndex)[1]}>
-                        <div
-                            className='marker'
-                            onClick={() => setSelected([countryIndex])}>
-                            <div className='order'>{index + 1}</div>
-                            <div className='point'></div>
-                        </div>
-                    </Marker>
-                ))}
+                        </Marker>
+                    ))}
+                {itinerary &&
+                    itinerary.map(({ countryIndex, id }, index) => (
+                        <Marker
+                            key={id}
+                            latitude={latLong(countryIndex)[0]}
+                            longitude={latLong(countryIndex)[1]}>
+                            <div
+                                className='marker'
+                                onClick={() => setSelected([countryIndex])}>
+                                <div className='order'>{index + 1}</div>
+                                <div className='point'></div>
+                            </div>
+                        </Marker>
+                    ))}
             </ReactMapGL>
         </div>
     );

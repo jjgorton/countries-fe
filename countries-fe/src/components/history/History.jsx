@@ -31,18 +31,19 @@ const History = ({ history, allCountries, setSelected }) => {
                         className='history'
                         {...provided.droppableProps}
                         ref={provided.innerRef}>
-                        {history.map(({ countryIndex, id }, index) => {
-                            return (
-                                <Details
-                                    key={id}
-                                    id={id}
-                                    index={index}
-                                    country={allCountries[countryIndex]}
-                                    setSelected={setSelected}
-                                    countryIndex={countryIndex}
-                                />
-                            );
-                        })}
+                        {history &&
+                            history.map(({ countryIndex, id }, index) => {
+                                return (
+                                    <Details
+                                        key={id}
+                                        id={id}
+                                        index={index}
+                                        country={allCountries[countryIndex]}
+                                        setSelected={setSelected}
+                                        countryIndex={countryIndex}
+                                    />
+                                );
+                            })}
                         {provided.placeholder}
                     </div>
                 )}
