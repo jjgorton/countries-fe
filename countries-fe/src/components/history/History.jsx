@@ -41,6 +41,7 @@ const History = ({ history, allCountries, setSelected }) => {
                                         country={allCountries[countryIndex]}
                                         setSelected={setSelected}
                                         countryIndex={countryIndex}
+                                        list='history-list'
                                     />
                                 );
                             })}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import ReactMapGL, { Marker, FlyToInterpolator } from 'react-map-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import { easeCubic } from 'd3-ease';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,6 +17,7 @@ const Map = ({
 }) => {
     const latLong = (index) => {
         const location = allCountries[index] ? allCountries[index].latlng : [];
+
         return location.length === 2 ? location : [0, 0];
     };
 
@@ -45,7 +46,6 @@ const Map = ({
         longitude: -122.4376,
         zoom: 1.5,
         transitionDuration: 5000,
-        transitionInterpolator: new FlyToInterpolator(),
         transitionEasing: easeCubic,
     });
 
@@ -57,7 +57,6 @@ const Map = ({
                 longitude: latLong(selected[0])[1],
                 zoom: areaZoom(selected),
                 transitionDuration: 5000,
-                transitionInterpolator: new FlyToInterpolator(),
                 transitionEasing: easeCubic,
             });
         } else {
@@ -67,14 +66,13 @@ const Map = ({
                 longitude: -122.4376,
                 zoom: 1.5,
                 transitionDuration: 5000,
-                transitionInterpolator: new FlyToInterpolator(),
                 transitionEasing: easeCubic,
             });
         }
     }, [selected]);
 
     return (
-        <div className='map' data-testid='mapbox'>
+        <div data-testid='mapbox' className='map'>
             <ReactMapGL
                 {...viewport}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
