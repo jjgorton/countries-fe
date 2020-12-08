@@ -1,7 +1,5 @@
-import axiosWithHeader from './axiosWithHeader'
-
+import axiosWithHeader from './axiosWithHeader';
 
 export const getAll = () => {
-    return axiosWithHeader()
-        .get('https://restcountries-v1.p.rapidapi.com/all')
-}
+    return axiosWithHeader().get('https://restcountries-v1.p.rapidapi.com/all');
+};

@@ -59,9 +59,10 @@ const SearchBar = ({ allCountries, setSelected, addHistory }) => {
                 onChange={handleChanges}
                 value={query}
                 onKeyDown={handleKeys}
+                data-testid='search-input'
             />
             <div className='auto-complete'>{suggestion}</div>
-            <button>
+            <button data-testid='search-button'>
                 <FontAwesomeIcon icon={faSearchLocation} />
             </button>
         </form>

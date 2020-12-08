@@ -23,6 +23,8 @@ function App() {
         getAll()
             .then((res) => setAllCountries(res.data))
             .catch((err) => console.error(err));
+
+        return () => null; //testing library wants a clean-up
     }, []);
 
     const addHistory = (countryIndexArr) => {

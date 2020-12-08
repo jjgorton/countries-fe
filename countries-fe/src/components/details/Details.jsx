@@ -10,7 +10,7 @@ import currency from '../../assets/currencies.json';
 
 import './details.scss';
 
-const Details = ({ country, index, id, setSelected, countryIndex }) => {
+const Details = ({ country, index, id, setSelected, countryIndex, list }) => {
     const [showInfo, setShowInfo] = useState(false);
 
     const langList = (arr) => {
@@ -29,6 +29,7 @@ const Details = ({ country, index, id, setSelected, countryIndex }) => {
         <Draggable draggableId={id} index={index}>
             {(provided) => (
                 <div
+                    data-testid={list}
                     className='details-container'
                     onClick={() => setSelected([countryIndex])}
                     {...provided.draggableProps}
