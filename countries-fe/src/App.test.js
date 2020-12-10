@@ -27,7 +27,7 @@ afterAll(() => {
     jest.clearAllMocks();
 });
 
-test('add item to history', async () => {
+test('add Details to history via search', async () => {
     render(<App />);
 
     // const map = screen.getByTestId('mapbox').firstChild.firstChild.firstChild
