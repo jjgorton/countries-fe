@@ -15,7 +15,7 @@ const SearchBar = ({ allCountries, setSelected, addHistory }) => {
     useEffect(() => {
         //prevent running on rerenders
         //if perfomance still suffers, consider useCallback
-        setKeyWords(Object.keys(swapKeyVal(allCountries)));
+        allCountries && setKeyWords(Object.keys(swapKeyVal(allCountries)));
     }, [allCountries]);
 
     const handleChanges = (e) => {

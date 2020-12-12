@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 import History from './History';
 
 test('renders History', () => {

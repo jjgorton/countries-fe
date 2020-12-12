@@ -22,7 +22,10 @@ function App() {
     useEffect(() => {
         getAll()
             .then((res) => setAllCountries(res.data))
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                alert(`Oops! Something went wrong: \n\n ${err}`);
+                console.error(err);
+            });
 
         return () => null; //testing library wants a clean-up
     }, []);
