@@ -69,6 +69,7 @@ const Map = ({
                 transitionEasing: easeCubic,
             });
         }
+        return () => null; //testing library wants a clean-up
     }, [selected]);
 
     return (

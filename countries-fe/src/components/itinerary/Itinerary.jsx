@@ -30,18 +30,20 @@ const Itinerary = ({ itinerary, allCountries, setSelected }) => {
                         className='itinerary'
                         {...provided.droppableProps}
                         ref={provided.innerRef}>
-                        {itinerary.map(({ countryIndex, id }, index) => {
-                            return (
-                                <Details
-                                    key={id}
-                                    id={id}
-                                    index={index}
-                                    country={allCountries[countryIndex]}
-                                    setSelected={setSelected}
-                                    countryIndex={countryIndex}
-                                />
-                            );
-                        })}
+                        {itinerary &&
+                            itinerary.map(({ countryIndex, id }, index) => {
+                                return (
+                                    <Details
+                                        key={id}
+                                        id={id}
+                                        index={index}
+                                        country={allCountries[countryIndex]}
+                                        setSelected={setSelected}
+                                        countryIndex={countryIndex}
+                                        list='itinerary-list'
+                                    />
+                                );
+                            })}
                         {provided.placeholder}
                     </div>
                 )}

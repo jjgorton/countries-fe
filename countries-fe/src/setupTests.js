@@ -9,6 +9,8 @@ import '@testing-library/jest-dom/extend-expect';
 
 import { mockData } from './api/mockData';
 
+import ReactMapGL, { Marker } from 'react-map-gl';
+
 // jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
 //     GeolocateControl: jest.fn(),
 //     Map: jest.fn(() => ({
