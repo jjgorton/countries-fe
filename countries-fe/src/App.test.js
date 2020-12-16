@@ -7,11 +7,6 @@ import App from './App';
 test('add Details to history via search', async () => {
     render(<App />);
 
-    // const map = screen.getByTestId('mapbox').firstChild.firstChild.firstChild
-    //     .firstChild;
-    // console.log(map);
-    // fireEvent.click(map);
-
     const search = await screen.findByTestId('search-input');
     const button = await screen.findByTestId('search-button');
 
