@@ -18,11 +18,14 @@ const Details = ({ country, index, id, setSelected, countryIndex, list }) => {
     };
 
     const money = (data) => {
-        const options = { style: 'currency', currency: data.currencies[0] };
+        const options = {
+            style: 'currency',
+            currency: Object.keys(data.currencies)[0],
+        };
         let hack = 1;
         const symb = hack.toLocaleString(data.alpha2Code, options);
 
-        return currency[data.currencies[0]] + ` (${symb})`;
+        return currency[Object.keys(data.currencies)[0]] + ` (${symb})`;
     };
 
     return (
@@ -36,19 +39,26 @@ const Details = ({ country, index, id, setSelected, countryIndex, list }) => {
                     ref={provided.innerRef}
                     {...provided.dragHandleProps}>
                     <div className={`details ${showInfo && 'info-container'}`}>
-                        {!showInfo && <h1>{country.name}</h1>}
+                        {!showInfo && <h1>{country.name.common}</h1>}
                         {showInfo && (
                             <div className='info'>
                                 <p>Currency: {money(country)}</p>
-                                <p>Language: {langList(country.languages)}</p>
-                                <p>People are called "{country.demonym}"</p>
+                                <p>
+                                    Language:{' '}
+                                    {Object.values(country.languages).join(
+                                        ', '
+                                    )}
+                                </p>
+                                <p>
+                                    People are called "{country.demonyms.eng.m}"
+                                </p>
                                 <p>
                                     Population:{' '}
                                     {Number(
                                         country.population
                                     ).toLocaleString()}
                                 </p>
-                                <p>Capital: {country.capital}</p>
+                                <p>Capital: {country.capital[0]}</p>
                             </div>
                         )}
                     </div>

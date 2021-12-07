@@ -50,12 +50,13 @@ function App() {
                 country.latlng[1]
             );
 
-            if (currDistance < closest.dist)
+            if (currDistance < closest.dist) {
                 closest = {
-                    countryName: country.name,
+                    countryName: country.name.common,
                     countryIndex: index,
                     dist: currDistance,
                 };
+            }
         });
 
         setSelected([closest.countryIndex]);

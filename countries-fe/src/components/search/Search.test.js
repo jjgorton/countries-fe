@@ -16,9 +16,9 @@ test('takes input', () => {
     render(<SearchBar />);
     const search = screen.getByTestId('search-input');
 
-    fireEvent.change(search, { target: { value: 'fran' } });
+    fireEvent.change(search, { target: { value: 'ma' } });
 
-    expect(search.value).toBe('fran');
+    expect(search.value).toBe('ma');
 });
 
 test('autoCompletes', async () => {
@@ -28,9 +28,9 @@ test('autoCompletes', async () => {
 
     const search = getByTestId('search-input');
 
-    fireEvent.change(search, { target: { value: 'fran' } });
+    fireEvent.change(search, { target: { value: 'ma' } });
 
-    const autoComplete = await findByText(/france/i);
+    const autoComplete = await findByText(/madagascar/i);
 
     expect(autoComplete).toBeInTheDocument();
 });
