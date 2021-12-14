@@ -1,4 +1,4 @@
-[
+export const mockData = [
     {
         name: {
             common: 'Kenya',

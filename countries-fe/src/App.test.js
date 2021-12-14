@@ -37,5 +37,5 @@ test('add Details to Ininerary by drag and drop', async () => {
 
     const country = await screen.findByTestId('history-list');
 
-    expect(country.name).toBeInTheDocument();
+    expect(country).toBeInTheDocument();
 });
