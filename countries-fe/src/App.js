@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { getAll } from './api/actions';
-import { distance } from './utils/distance.ts';
+import { distance, distanceOnSphere } from './utils/distance.ts';
 
 import Map from './components/map/Map';
 import SearchBar from './components/search/SearchBar';
@@ -40,6 +40,7 @@ function App() {
     };
 
     const closestCountry = (lat, lon) => {
+        console.log('lat: ', lat, '\nlon: ', lon);
         let closest = { countryName: '', countryIndex: '', dist: Infinity };
 
         allCountries.forEach((country, index) => {
