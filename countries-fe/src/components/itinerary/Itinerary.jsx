@@ -13,6 +13,7 @@ import './itinerary.scss';
 
 const Itinerary = ({ itinerary, allCountries, setSelected }) => {
     const [showItinerary, setShowItinerary] = useState(false);
+    console.log(itinerary);
 
     return (
         <div className={`itinerary-container ${!showItinerary && 'hide'}`}>
