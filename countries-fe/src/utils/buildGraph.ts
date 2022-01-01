@@ -59,7 +59,7 @@ function findShortestPath(allCountries: Country[], itinerary: Itinerary[]) {
         ];
 
         while (stack.length) {
-            const cur: Node = stack.pop();
+            const cur: any = stack.pop();
             cur.visited.add(cur.path[cur.path.length - 1]);
 
             if (

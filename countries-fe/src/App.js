@@ -127,6 +127,7 @@ function App() {
                 </Droppable>
                 <Itinerary
                     itinerary={itinerary}
+                    setItinerary={setItinerary}
                     allCountries={allCountries}
                     setSelected={setSelected}
                 />

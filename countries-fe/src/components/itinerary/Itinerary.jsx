@@ -8,10 +8,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { Droppable } from 'react-beautiful-dnd';
+import { findShortestPath } from '../../utils/buildGraph';
 
 import './itinerary.scss';
 
-const Itinerary = ({ itinerary, allCountries, setSelected }) => {
+const Itinerary = ({ itinerary, setItinerary, allCountries, setSelected }) => {
     const [showItinerary, setShowItinerary] = useState(false);
     console.log(itinerary);
 
@@ -24,6 +25,12 @@ const Itinerary = ({ itinerary, allCountries, setSelected }) => {
                     onClick={() => setShowItinerary(!showItinerary)}
                 />
                 <h1>Trip Itinerary</h1>
+                <button
+                    onClick={() =>
+                        setItinerary(findShortestPath(allCountries, itinerary))
+                    }>
+                    TSP
+                </button>
             </div>
             <Droppable droppableId='itinerary'>
                 {(provided) => (
