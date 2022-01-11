@@ -40,7 +40,6 @@ function App() {
     };
 
     const closestCountry = (lat, lon) => {
-        console.log('lat: ', lat, '\nlon: ', lon);
         let closest = { countryName: '', countryIndex: '', dist: Infinity };
 
         allCountries.forEach((country, index) => {
@@ -128,6 +127,7 @@ function App() {
                 </Droppable>
                 <Itinerary
                     itinerary={itinerary}
+                    setItinerary={setItinerary}
                     allCountries={allCountries}
                     setSelected={setSelected}
                 />
