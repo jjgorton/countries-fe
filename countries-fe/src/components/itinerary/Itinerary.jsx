@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Details from '../details/Details';
+import Spinner from '../spinner/Spinner';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -14,7 +15,23 @@ import './itinerary.scss';
 
 const Itinerary = ({ itinerary, setItinerary, allCountries, setSelected }) => {
     const [showItinerary, setShowItinerary] = useState(false);
+    const [showSpinner, setShowSpinner] = useState(false);
     console.log(itinerary);
+
+    useEffect(() => {
+        if (showSpinner) {
+            findShortestPath(allCountries, itinerary)
+                .then((res) => {
+                    setItinerary(res);
+                    setShowSpinner(false);
+                })
+                .catch((err) => {
+                    alert(`Oops! Something went wrong: \n\n ${err}`);
+                    console.error(err);
+                });
+        }
+        return () => null;
+    }, [showSpinner]);
 
     return (
         <div className={`itinerary-container ${!showItinerary && 'hide'}`}>
@@ -25,12 +42,7 @@ const Itinerary = ({ itinerary, setItinerary, allCountries, setSelected }) => {
                     onClick={() => setShowItinerary(!showItinerary)}
                 />
                 <h1>Trip Itinerary</h1>
-                <button
-                    onClick={() =>
-                        setItinerary(findShortestPath(allCountries, itinerary))
-                    }>
-                    TSP
-                </button>
+                <button onClick={() => setShowSpinner(true)}>TSP</button>
             </div>
             <Droppable droppableId='itinerary'>
                 {(provided) => (
@@ -38,20 +50,23 @@ const Itinerary = ({ itinerary, setItinerary, allCountries, setSelected }) => {
                         className='itinerary'
                         {...provided.droppableProps}
                         ref={provided.innerRef}>
-                        {itinerary &&
-                            itinerary.map(({ countryIndex, id }, index) => {
-                                return (
-                                    <Details
-                                        key={id}
-                                        id={id}
-                                        index={index}
-                                        country={allCountries[countryIndex]}
-                                        setSelected={setSelected}
-                                        countryIndex={countryIndex}
-                                        list='itinerary-list'
-                                    />
-                                );
-                            })}
+                        {(showSpinner && (
+                            <Spinner showSpinner={showSpinner} />
+                        )) ||
+                            (itinerary &&
+                                itinerary.map(({ countryIndex, id }, index) => {
+                                    return (
+                                        <Details
+                                            key={id}
+                                            id={id}
+                                            index={index}
+                                            country={allCountries[countryIndex]}
+                                            setSelected={setSelected}
+                                            countryIndex={countryIndex}
+                                            list='itinerary-list'
+                                        />
+                                    );
+                                }))}
                         {provided.placeholder}
                     </div>
                 )}

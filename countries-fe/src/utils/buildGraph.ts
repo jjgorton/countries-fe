@@ -9,7 +9,7 @@ interface Country {
     latlng: number[];
 }
 
-function buildGraph(allCountries: Country[], itinerary: Itinerary[]) {
+async function buildGraph(allCountries: Country[], itinerary: Itinerary[]) {
     // {countryIndex1: {countryIndex2: distance}, countryIndex2: {countryIndex1: distance}}
     const graph: any = {};
 
@@ -47,8 +47,19 @@ interface Node {
     visited: Set<string>;
 }
 
-function findShortestPath(allCountries: Country[], itinerary: Itinerary[]) {
-    const graph = buildGraph(allCountries, itinerary);
+interface Connection {
+    [key: string]: number;
+}
+
+type Promise = {
+    [index: string]: any;
+};
+
+async function findShortestPath(
+    allCountries: Country[],
+    itinerary: Itinerary[]
+) {
+    const graph: Promise = await buildGraph(allCountries, itinerary);
 
     let shortestPath: string[] = [];
     let shortestDistance: number = Infinity;
@@ -59,7 +70,7 @@ function findShortestPath(allCountries: Country[], itinerary: Itinerary[]) {
         ];
 
         while (stack.length) {
-            const cur: any = stack.pop();
+            const cur: Node = stack.pop()!;
             cur.visited.add(cur.path[cur.path.length - 1]);
 
             if (
@@ -70,7 +81,8 @@ function findShortestPath(allCountries: Country[], itinerary: Itinerary[]) {
                 shortestPath = cur.path;
             }
 
-            const connections = graph[cur.path[cur.path.length - 1]];
+            const connections: Connection =
+                graph[cur.path[cur.path.length - 1]];
 
             for (let i in connections) {
                 if (!cur.visited.has(i)) {
