@@ -42,7 +42,9 @@ const Itinerary = ({ itinerary, setItinerary, allCountries, setSelected }) => {
                     onClick={() => setShowItinerary(!showItinerary)}
                 />
                 <h1>Trip Itinerary</h1>
-                <button onClick={() => setShowSpinner(true)}>TSP</button>
+                <button className={'tsp'} onClick={() => setShowSpinner(true)}>
+                    TSP
+                </button>
             </div>
             <Droppable droppableId='itinerary'>
                 {(provided) => (

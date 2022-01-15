@@ -1,7 +1,7 @@
 @import '../../global_styles/';
 
 .itinerary-container {
-    z-index: 3;
+    z-index: 1;
     // margin-top: 25vh;
     min-width: 35rem;
     min-height: fit-content;
@@ -38,6 +38,23 @@
             text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.349),
                 1px 1px 1px rgba(0, 0, 0, 0.274);
             // margin-left: 4rem;
+        }
+
+        .tsp {
+            font-size: 3rem;
+            color: goldenrod;
+            text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.349),
+                1px 1px 1px rgba(0, 0, 0, 0.274);
+            background: $bronze;
+            border: 5px outset goldenrod;
+            transform: translate(10rem, -0rem);
+            z-index: 2;
+
+            &:hover {
+                cursor: pointer;
+                color: rgb(209, 179, 103);
+                background: rgb(255, 225, 148);
+            }
         }
     }
 }
